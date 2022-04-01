@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'League Spartan', sans-serif;
 }
 
 body {
@@ -10,10 +12,27 @@ body {
 
 .content {
   display: flex;
+  gap: 20px;
 }
 
 .container {
-  width: 800px;
+  margin-left: 6%;
+  width: 850px;
   height: 80vh;
   display: flex;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  height: auto;
+  font-size: 24px;
+  padding: 11px;
 }
