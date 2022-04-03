@@ -8,10 +8,11 @@
 
 body {
   text-align: center;
+  background-color: rgb(222, 230, 238);
 }
 
 h1 {
-  font-size: 37px;
+  font-size: 38px;
   padding: 21px;
 }
 
@@ -65,6 +66,6 @@ button, #color {
   height: 60px;
 }
 
-#random {
+#random, #gray {
   color: red;
 }

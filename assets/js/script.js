@@ -23,6 +23,10 @@ const random = document.querySelector('#random');
 let randomSet = false;
 random.addEventListener('click', toggleRandomSet);
 
+const gray = document.querySelector('#gray');
+let graySet = false;
+gray.addEventListener('click', toggleGraySet);
+
 let heigth = container.clientHeight;
 let width = container.clientWidth;
 
@@ -53,11 +57,18 @@ function constructDiv(gridSize) {
 function changeBgColor(e) {
   if (e.type === 'mouseover' && !mouseDown) return;
 
-  if (randomSet == false) {
-    e.target.style.backgroundColor = bgColor;
+  if (randomSet == true) {
+    e.target.style.backgroundColor = getRandomColor();
+  }
+  else if (graySet == true) {
+    if (e.target.style.backgroundColor != 'black') {
+      e.target.style.backgroundColor = 'black';
+      e.target.style.opacity = 0;
+    }
+    e.target.style.opacity = Number(e.target.style.opacity) + 0.1;
   }
   else {
-    e.target.style.backgroundColor = getRandomColor();
+    e.target.style.backgroundColor = bgColor;
   }
 
 }
@@ -81,8 +92,25 @@ function toggleRandomSet() {
     random.style.color = 'red';
   }
   else {
+    if(graySet == true) {
+      toggleGraySet();
+    }
     randomSet = true;
     random.style.color = '#32cd32';
+  }
+}
+
+function toggleGraySet() {
+  if (graySet == true) {
+    graySet = false;
+    gray.style.color = 'red';
+  }
+  else {
+    if(randomSet == true) {
+      toggleRandomSet();
+    }
+    graySet = true;
+    gray.style.color = '#32cd32';
   }
 }
 
