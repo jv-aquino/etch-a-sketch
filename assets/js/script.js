@@ -4,21 +4,27 @@ grid.style.cssText = "display: flex;"
 
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', clearDiv);
+clear.addEventListener('click', () => {
+  constructDiv(lastSize);
+});
 
 let bgColor = '#0000ff';
+
+const newGrid = document.querySelector('#new');
+newGrid.addEventListener('click', getNewGrid);
 
 let lastSize = 16;
 
 const color = document.querySelector('#color');
-color.addEventListener('click', changeColor);
+grid.addEventListener('mouseover', changeColor);
 color.addEventListener('change', changeColor);
 
 const random = document.querySelector('#random');
-let randomSet = 'unset';
-random.addEventListener('click', toggleRandom);
+let randomSet = false;
+random.addEventListener('click', toggleRandomSet);
 
-let heigth = container.offsetHeight;
-let width = container.offsetWidth;
+let heigth = container.clientHeight;
+let width = container.clientWidth;
 
 let mouseDown = false;
 checkMouseDown();
@@ -46,21 +52,37 @@ function constructDiv(gridSize) {
 
 function changeBgColor(e) {
   if (e.type === 'mouseover' && !mouseDown) return;
-  e.target.style.backgroundColor = bgColor;
+
+  if (randomSet == false) {
+    e.target.style.backgroundColor = bgColor;
+  }
+  else {
+    e.target.style.backgroundColor = getRandomColor();
+  }
+
 }
 
 function changeColor() {
   bgColor = color.value;
 }
 
-function toggleRandom() {
-  if (randomSet == 'set') {
-    randomSet = 'unset';
-    random.style.backgroundColor = 'red';
+function getRandomColor() {
+  let color = '#';
+   for (let i = 0; i < 6; i++){
+      const num = Math.floor(Math.random() * 16);
+      color += (num).toString(16);
+   };
+   return color;
+}
+
+function toggleRandomSet() {
+  if (randomSet == true) {
+    randomSet = false;
+    random.style.color = 'red';
   }
   else {
-    randomSet = 'set';
-    random.style.backgroundColor = 'green';
+    randomSet = true;
+    random.style.color = '#32cd32';
   }
 }
 
@@ -71,7 +93,19 @@ function clearDiv() {
   }
 
   container.removeChild(grid);
-  constructDiv(lastSize);
+}
+
+function getNewGrid() {  
+  let size;
+
+  do {
+    size = prompt('New grid size (between 8 and 100):');
+    size = Number(size);
+  } 
+  while (isNaN(size) || size < 8 || size > 100);
+
+  clearDiv();
+  constructDiv(size);
 }
 
 function checkMouseDown() {
