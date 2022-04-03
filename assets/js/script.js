@@ -5,7 +5,17 @@ grid.style.cssText = "display: flex;"
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', clearDiv);
 
+let bgColor = '#0000ff';
+
 let lastSize = 16;
+
+const color = document.querySelector('#color');
+color.addEventListener('click', changeColor);
+color.addEventListener('change', changeColor);
+
+const random = document.querySelector('#random');
+let randomSet = 'unset';
+random.addEventListener('click', toggleRandom);
 
 let heigth = container.offsetHeight;
 let width = container.offsetWidth;
@@ -14,7 +24,6 @@ let mouseDown = false;
 checkMouseDown();
 
 constructDiv(16);
-container.appendChild(grid);
 
 function constructDiv(gridSize) {
   lastSize = gridSize;
@@ -32,11 +41,27 @@ function constructDiv(gridSize) {
     }
     grid.appendChild(column);
   }
+  container.append(grid);
 }
 
 function changeBgColor(e) {
   if (e.type === 'mouseover' && !mouseDown) return;
-  e.target.style.backgroundColor = 'blue';
+  e.target.style.backgroundColor = bgColor;
+}
+
+function changeColor() {
+  bgColor = color.value;
+}
+
+function toggleRandom() {
+  if (randomSet == 'set') {
+    randomSet = 'unset';
+    random.style.backgroundColor = 'red';
+  }
+  else {
+    randomSet = 'set';
+    random.style.backgroundColor = 'green';
+  }
 }
 
 function clearDiv() {
@@ -47,7 +72,6 @@ function clearDiv() {
 
   container.removeChild(grid);
   constructDiv(lastSize);
-  container.append(grid);
 }
 
 function checkMouseDown() {

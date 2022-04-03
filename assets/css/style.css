@@ -10,6 +10,10 @@ body {
   text-align: center;
 }
 
+h1 {
+  padding: 22px;
+}
+
 .content {
   display: flex;
   gap: 20px;
@@ -31,8 +35,27 @@ body {
   gap: 20px;
 }
 
-button {
+button, #color {
   height: auto;
-  font-size: 24px;
-  padding: 11px;
+  font-size: 25px;
+  padding: 13px;
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: violet;
+  cursor: pointer;
+}
+
+#color {
+  border-width: 1px;
+  border-image: none;
+  background: none;
+  border: none;
+  border-radius: 10%;
+  padding: 0;
+  width: 240px;
+  height: 60px;
+}
+
+#random {
+  background-color: red;
 }
