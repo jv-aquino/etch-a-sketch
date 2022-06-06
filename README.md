@@ -5,3 +5,4 @@ Special functions:
 * Random color (assigns a random color for each clicked div)
 * Clear grid
 * Change the grid size
+### [View page](https://jv-aquino.github.io/etch-a-sketch/)
